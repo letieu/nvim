@@ -1,3 +1,8 @@
+## tab move: 
+```
+t             :  open new tab from NERD tree
+<Space> 1,2,3 : swicth tab
+```
 ## termial💴 :
 ```
 <Space> t: Toggle termial
