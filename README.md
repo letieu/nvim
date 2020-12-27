@@ -1,7 +1,7 @@
 ## termial💴 :
 ```
-<Space><Space>: Toggle termial
-<Space> t     : New tab terminal
+<Space> t: Toggle termial
+<Space> T     : New tab terminal
 <Space><Tab>  : Switch terminal
 ```
 ## general🈂 :
