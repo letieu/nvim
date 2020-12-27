@@ -20,7 +20,8 @@ zc, zo            : fold method, open method
 ```
 <Space> e     : toggle
 m             : show menu
-s             : open split
+s             : open split | 
+i             : split ---
 t             : open in new tab
 ```
 
