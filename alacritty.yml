@@ -1,0 +1,106 @@
+env:
+  TERM: screen-256color
+
+scrolling:
+  history: 10000
+  multiplier: 3
+  scrolling_multiplier: 3
+
+# }}} window
+# {{{ font
+font:
+  normal:
+    family: SourceCodePro
+    style: Regular
+
+  size: 8
+
+  offset:
+    x: 0
+    y: 5
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+  use_thin_strokes: true
+
+# }}} font
+# {{{ colors
+background_opacity: 1
+
+# Colors (Dracula)
+colors:
+  name: Default (dark)
+  author: Chris Kempson
+  primary:
+    background: "#151515"
+    foreground: "#d0d0d0"
+  cursor:
+    text: "#151515"
+    cursor: "#d0d0d0"
+  normal:
+    black: "#151515"
+    red: "#ac4142"
+    green: "#90a959"
+    yellow: "#f4bf75"
+    blue: "#6a9fb5"
+    magenta: "#aa759f"
+    cyan: "#75b5aa"
+    white: "#d0d0d0"
+  bright:
+    black: "#505050"
+    red: "#ac4142"
+    green: "#90a959"
+    yellow: "#f4bf75"
+    blue: "#6a9fb5"
+    magenta: "#aa759f"
+    cyan: "#75b5aa"
+    white: "#f5f5f5"
+
+# }}} colors
+# {{{ mouse / cursor
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  hide_when_typing: true
+
+  url:
+    launcher:
+      program: open
+      args: []
+
+selection:
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+  save_to_clipboard: true
+
+cursor:
+  style: Block
+  vi_mode_style: Beam
+  unfocused_hollow: true
+
+# }}} mouse / cursor
+# {{{ other
+live_config_reload: true
+enable_experimental_conpty_backend: false
+
+alt_send_esc: true
+
+bell:
+  animation: EaseOutExpo
+  duration: 0
+  color: "#ffffff"
+
+debug:
+  render_timer: false
+  persistent_logging: false
+  log_level: Warn
+  print_events: false
+  ref_test: false
+
+# }}} other
+# {{{ keybindings
