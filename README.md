@@ -1,9 +1,18 @@
-![alt text](https://github.com/letieu/nvim/blob/master/images/1.png?raw=true | =100x)
-![alt text](https://github.com/letieu/nvim/blob/master/images/2.png?raw=true | width=100)
-![alt text](https://github.com/letieu/nvim/blob/master/images/3.png?raw=true | width=100)
 
+<div style='display: flex; justify-content: space-between'>
+<img src='https://github.com/letieu/nvim/blob/master/images/1.png?raw=true' width='800px'/>
+<img src='https://github.com/letieu/nvim/blob/master/images/2.png?raw=true' width='400px'/>
+<img src='https://github.com/letieu/nvim/blob/master/images/3.png?raw=true' width='400px'/>
+</div>
 
-
+# INSTALL
+1. install [neovim](https://neovim.io)
+2. config: 
+```
+rm -rf ~/.config/nvim
+git clone https://github.com/letieu/nvim.git ~/.config/nvim
+nvim +PluginInstall
+```
 
 # KEYMAP
 ## tab move: 
