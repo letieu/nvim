@@ -8,6 +8,7 @@ t             :  open new tab from NERD tree
 <Space> t: Toggle termial
 <Space> T     : New tab terminal
 <Space><Tab>  : Switch terminal
+<Space><Space>: Close terminal
 ```
 ## general🈂 :
 ```
