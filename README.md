@@ -8,11 +8,11 @@
 # INSTALL
 1. install [neovim](https://neovim.io)
 2. config: 
-```
+`
 rm -rf ~/.config/nvim
 git clone https://github.com/letieu/nvim.git ~/.config/nvim
 nvim +PluginInstall
-```
+`
 
 # KEYMAP
 ## tab move: 
