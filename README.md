@@ -6,8 +6,10 @@
 </div>
 
 # INSTALL
+Use vim with alacritty terminal is the best couple
+
 1. install [neovim](https://neovim.io)
-2.(Optional) install [alacritty](https://github.com/alacritty/alacritty) terminal and create config [file](https://github.com/letieu/nvim/blob/master/alacritty.yml) in `~/.config/alacritty/alacritty.yml`
+2. (Optional) install [alacritty](https://github.com/alacritty/alacritty) terminal and create config [file](https://github.com/letieu/nvim/blob/master/alacritty.yml) in `~/.config/alacritty/alacritty.yml`
 3. config: 
 ```
 rm -rf ~/.config/nvim
