@@ -1,9 +1,12 @@
- "--------------------------------------------------------------- plugin 
+"--------------------------------------------------------------- plugin 
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'dracula/vim'
+"Plug 'dracula/vim'
+"Plug 'ayu-theme/ayu-vim'
+"Plug 'fatih/molokai'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'preservim/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
@@ -16,16 +19,19 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
 
 "--------------------------------------------------------------- General
 let mapleader = "\<Space>"
-let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_jsdoc = 1 " endable doc
 set number  relativenumber
 set clipboard+=unnamedplus
-set noshowmode
+set noshowmode      " hide Text in the command bar
+nnoremap <leader>z :Goyo<CR>
+
 set tabstop=4       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
@@ -38,12 +44,13 @@ set softtabstop=4   " Sets the number of columns for a TAB
 set expandtab       " Expand TABs to spaces
 
 
+
 "--------------------------------------------------------------- theme config
 if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme dracula
+colorscheme palenight
 
 
 "--------------------------------------------------------------- NERTtree config
@@ -62,8 +69,8 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 
 "---------------------------------------------------------------- terminal
-noremap  <leader><leader>  :FloatermToggle<CR>
-noremap  <leader>t  :FloatermNew<CR>
+noremap  <leader>t  :FloatermToggle<CR>
+noremap  <leader>T         :FloatermNew<CR>
 noremap  <leader><leader>  <Esc>:FloatermToggle<CR>
 tnoremap <leader><leader>  <C-\><C-n>:FloatermToggle<CR>
 tnoremap <leader><Tab>  <C-\><C-n>:FloatermNext<CR>
@@ -109,7 +116,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 "------------------------------------------------------------------------------ FZF search
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
-nnoremap  <leader>p :Files<CR>
+noremap  <leader>p :Files<CR>
 
 
 "------------------------------------------------------------------------------ Easymotion
@@ -121,3 +128,15 @@ set foldmethod=syntax "syntax highlighting items specify folds
 set foldcolumn=1 "defines 1 col at window left, to indicate folding
 let javaScript_fold=1 "activate folding by JS syntax
 set foldlevelstart=99 "start file with all folds opened
+
+"------------------------------------------------------------------------------- TAB
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
