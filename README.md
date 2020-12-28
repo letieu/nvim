@@ -1,4 +1,4 @@
-![alt text](https://github.com/letieu/nvim/blob/master/images/1.png?raw=true | width=100)
+![alt text](https://github.com/letieu/nvim/blob/master/images/1.png?raw=true | =100x)
 ![alt text](https://github.com/letieu/nvim/blob/master/images/2.png?raw=true | width=100)
 ![alt text](https://github.com/letieu/nvim/blob/master/images/3.png?raw=true | width=100)
 
