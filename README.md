@@ -20,23 +20,25 @@ nvim +PluginInstall
 ```
 # PLUGIN INSTALLED
 ``` 
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-"Plug 'fatih/molokai'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'voldikss/vim-floaterm'
-Plug 'preservim/nerdcommenter'
-Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'posva/vim-vue'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/goyo.vim'
+scrooloose/nerdtree
+Xuyuanp/nerdtree-git-plugin
+ryanoasis/vim-devicons
+fatih/molokai
+drewtempelmeyer/palenight.vim
+voldikss/vim-floaterm
+preservim/nerdcommenter
+airblade/vim-gitgutter
+neoclide/coc.nvim
+itchyny/lightline.vim
+junegunn/fzf.vim
+junegunn/fzf 
+posva/vim-vue
+pangloss/vim-javascript
+leafgarland/typescript-vim
+easymotion/vim-easymotion
+terryma/vim-multiple-cursors
+junegunn/goyo.vim
+tpope/vim-surround
 ```
 # KEYMAP
 ## tab move: 
@@ -85,4 +87,9 @@ s             : s{char}{char}
 <C-n>         : Select word, find next
 <C-x>, <C-p>  : remove, back 
 <A-n>         : Select all
+```
+
+## Vim surround✌ :
+```
+cs " '        : change "abc" to 'abc'
 ```

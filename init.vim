@@ -20,6 +20,7 @@ Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
