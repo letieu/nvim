@@ -18,7 +18,26 @@ git clone https://github.com/letieu/nvim.git ~/.config/nvim
 
 nvim +PluginInstall
 ```
-
+# PLUGIN INSTALLED
+``` 
+Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+"Plug 'fatih/molokai'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'voldikss/vim-floaterm'
+Plug 'preservim/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'posva/vim-vue'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/goyo.vim'
+```
 # KEYMAP
 ## tab move: 
 ```
