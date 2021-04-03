@@ -1,26 +1,27 @@
 "--------------------------------------------------------------- plugin 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-"Plug 'dracula/vim'
-"Plug 'ayu-theme/ayu-vim'
-"Plug 'fatih/molokai'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'voldikss/vim-floaterm'
-Plug 'preservim/nerdcommenter'
-Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'preservim/nerdcommenter'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'posva/vim-vue'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kassio/neoterm'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'pangloss/vim-javascript'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'voldikss/vim-floaterm'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'posva/vim-vue'
+"Plug 'leafgarland/typescript-vim' " TypeScript syntax
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'junegunn/goyo.vim'
+"Plug 'zivyangll/git-blame.vim'
+"Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'mhinz/vim-startify'
 
 call plug#end()
 
@@ -29,18 +30,18 @@ call plug#end()
 let mapleader = "\<Space>"
 let g:javascript_plugin_jsdoc = 1 " endable doc
 set number  relativenumber
-set clipboard+=unnamedplus
+set clipboard+=unnamedplus " clipboard global
 set noshowmode      " hide Text in the command bar
 nnoremap <leader>z :Goyo<CR>
 
-set tabstop=4       " The width of a TAB is set to 4.
+set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
                     " a width of 4.
 
-set shiftwidth=4    " Indents will have a width of 4
+set shiftwidth=2    " Indents will have a width of 4
 
-set softtabstop=4   " Sets the number of columns for a TAB
+set softtabstop=2   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
 
@@ -51,7 +52,7 @@ if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme palenight
+colorscheme dracula
 
 
 "--------------------------------------------------------------- NERTtree config
@@ -62,11 +63,11 @@ let g:NERDTreeStatusline = ''
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * silent NERDTreeMirror
 " Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Toggle
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"" Toggle
 nnoremap <leader>e :NERDTreeToggle<CR>
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 
 "---------------------------------------------------------------- terminal
@@ -141,3 +142,58 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+
+"------------------------------------------------------------------------------- GIT 
+nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
+
+"------------------------------------------------------------------------------ Bookmark
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_sign = '🌍'
+let g:bookmark_highlight_lines = 1
+
+"------------------------------------------------------------------------------ Startify
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_session_persistence    = 1
+let g:startify_lists = [
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ ]
+" Fancy custom header
+let g:startify_custom_header = [
+ \'                                                                             ..       : ',
+ \'                                          .                  .               .   .  . ',
+ \'                            .           .                .               .. .  .  * ',
+ \'                                   *          .                    ..        .',
+ \'                                                 .             .     . :  .   .    .  . ',
+ \'                                  .                         .   .  .  .   . ',
+ \'                                                               . .  *:. . . ',
+ \'                                                        .  .   . .. .         . ',
+ \'                                               .     . .  . ...    .    . ',
+ \'                             .              .  .  . .    . .  . . ',
+ \'                                              .    .     . ...   ..   .       .               . ',
+ \'                                       .  .    . *.   . .',
+ \'                          .                   :.  .           .',
+ \'                                       .   .    .    . ',
+ \'                                   .  .  .    ./|\ ',
+ \'                                  .  .. :.    . |             .               .',
+ \'                           .   ... .            |',
+ \'                       .    :.  . .   *.        |     .               .',
+ \'                         .  *.             You are here.',
+ \'                       . .    .               .             *.                         .',
+ \'']
