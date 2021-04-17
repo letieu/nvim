@@ -1,19 +1,23 @@
 "--------------------------------------------------------------- plugin 
 call plug#begin('~/.vim/plugged')
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdcommenter'
-Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'kassio/neoterm'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'pangloss/vim-javascript'
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'voldikss/vim-floaterm'
+Plug 'preservim/tagbar'
+Plug 'voldikss/vim-floaterm'
+Plug 'udalov/javap-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
+Plug 'itchyny/lightline.vim'
+
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
 "Plug 'airblade/vim-gitgutter'
 "Plug 'posva/vim-vue'
 "Plug 'leafgarland/typescript-vim' " TypeScript syntax
@@ -21,7 +25,6 @@ Plug 'pangloss/vim-javascript'
 "Plug 'junegunn/goyo.vim'
 "Plug 'zivyangll/git-blame.vim'
 "Plug 'MattesGroeger/vim-bookmarks'
-"Plug 'mhinz/vim-startify'
 
 call plug#end()
 
@@ -32,7 +35,6 @@ let g:javascript_plugin_jsdoc = 1 " endable doc
 set number  relativenumber
 set clipboard+=unnamedplus " clipboard global
 set noshowmode      " hide Text in the command bar
-nnoremap <leader>z :Goyo<CR>
 
 set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
@@ -45,15 +47,28 @@ set softtabstop=2   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
 
-
+autocmd FileType python,php,java,javascript,typescript silent TagbarOpen
 
 "--------------------------------------------------------------- theme config
 if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme dracula
+colorscheme gruvbox
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
 
+"Set lightline transparent
+let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+let s:palette.inactive.middle = s:palette.normal.middle
+let s:palette.tabline.middle = s:palette.normal.middle
+
+"Transparent background
+hi Normal guibg=NONE ctermbg=NONE
+
+"Split line
 
 "--------------------------------------------------------------- NERTtree config
 let g:NERDTreeShowHidden = 1
@@ -77,6 +92,9 @@ noremap  <leader><leader>  <Esc>:FloatermToggle<CR>
 tnoremap <leader><leader>  <C-\><C-n>:FloatermToggle<CR>
 tnoremap <leader><Tab>  <C-\><C-n>:FloatermNext<CR>
 
+let g:floaterm_height = 45
+let g:floaterm_width = 150
+let g:floaterm_title = ''
 
 "--------------------------------------------------------------- window
 nmap <C-h> <C-w>h
@@ -88,7 +106,6 @@ nnoremap <silent> <C-Up>    :resize -2<CR>
 nnoremap <silent> <C-Down>  :resize +2<CR>
 nnoremap <silent> <C-Left>  :vertical resize -2<CR>
 nnoremap <silent> <C-Right> :vertical resize +2<CR>
-
 
 "--------------------------------------------------------------- COC SERVER
 " Use tab for trigger completion with characters ahead and navigate.
@@ -112,24 +129,16 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 
 "------------------------------------------------------------------------------ FZF search
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
 noremap  <leader>p :Files<CR>
+noremap  <leader>P :Ag<CR>
 
 
 "------------------------------------------------------------------------------ Easymotion
 nmap s <Plug>(easymotion-overwin-f2)
 
-
-"------------------------------------------------------------------------------ FOLDING
-set foldmethod=syntax "syntax highlighting items specify folds
-set foldcolumn=1 "defines 1 col at window left, to indicate folding
-let javaScript_fold=1 "activate folding by JS syntax
-set foldlevelstart=99 "start file with all folds opened
 
 "------------------------------------------------------------------------------- TAB
 noremap <leader>1 1gt
@@ -143,57 +152,16 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-"------------------------------------------------------------------------------- GIT 
-nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
-
-"------------------------------------------------------------------------------ Bookmark
-let g:bookmark_save_per_working_dir = 1
-let g:bookmark_auto_save = 1
-highlight BookmarkSign ctermbg=NONE ctermfg=160
-highlight BookmarkLine ctermbg=194 ctermfg=NONE
-let g:bookmark_sign = '🌍'
-let g:bookmark_highlight_lines = 1
-
-"------------------------------------------------------------------------------ Startify
-" returns all modified files of the current git repo
-" `2>/dev/null` makes the command fail quietly, so that when we are not
-" in a git repo, the list will be empty
-function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-" same as above, but show untracked files, honouring .gitignore
-function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-let g:startify_session_persistence    = 1
+"------------------------------------------------------------------------------- Starify
+let g:startify_bookmarks = [
+            \ { 'Vim-config': '~/.config/nvim/' },
+            \ { 'Adflex-dropship': '~/tt_adflex/opc/src' },
+            \ { 'Adflex-cpo': '~/tt_adflex/cpo/src' },
+            \ { 'Adflex-report': '~/tt_adflex/report/src' },
+            \ { 'Fun-invoice': '~/tt_fun/sigma-vue' },
+            \ ]
 let g:startify_lists = [
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ ]
-" Fancy custom header
-let g:startify_custom_header = [
- \'                                                                             ..       : ',
- \'                                          .                  .               .   .  . ',
- \'                            .           .                .               .. .  .  * ',
- \'                                   *          .                    ..        .',
- \'                                                 .             .     . :  .   .    .  . ',
- \'                                  .                         .   .  .  .   . ',
- \'                                                               . .  *:. . . ',
- \'                                                        .  .   . .. .         . ',
- \'                                               .     . .  . ...    .    . ',
- \'                             .              .  .  . .    . .  . . ',
- \'                                              .    .     . ...   ..   .       .               . ',
- \'                                       .  .    . *.   . .',
- \'                          .                   :.  .           .',
- \'                                       .   .    .    . ',
- \'                                   .  .  .    ./|\ ',
- \'                                  .  .. :.    . |             .               .',
- \'                           .   ... .            |',
- \'                       .    :.  . .   *.        |     .               .',
- \'                         .  *.             You are here.',
- \'                       . .    .               .             *.                         .',
- \'']
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': 'files',     'header': ['   Files']            },
+          \ ]
+
