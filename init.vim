@@ -14,10 +14,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'ayu-theme/ayu-vim'
 
 
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 "Plug 'airblade/vim-gitgutter'
 "Plug 'posva/vim-vue'
 "Plug 'leafgarland/typescript-vim' " TypeScript syntax
@@ -50,23 +51,21 @@ set expandtab       " Expand TABs to spaces
 autocmd FileType python,php,java,javascript,typescript silent TagbarOpen
 
 "--------------------------------------------------------------- theme config
-if (has("termguicolors"))
- set termguicolors
-endif
-syntax enable
-colorscheme gruvbox
+set termguicolors     " enable true colors support
+let ayucolor="light"  " for light version of theme
+colorscheme ayu
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'ayu',
       \ }
 
 "Set lightline transparent
-let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-let s:palette.inactive.middle = s:palette.normal.middle
-let s:palette.tabline.middle = s:palette.normal.middle
+"let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+"let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+"let s:palette.inactive.middle = s:palette.normal.middle
+"let s:palette.tabline.middle = s:palette.normal.middle
 
 "Transparent background
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
 
 "Split line
 
@@ -92,9 +91,9 @@ noremap  <leader><leader>  <Esc>:FloatermToggle<CR>
 tnoremap <leader><leader>  <C-\><C-n>:FloatermToggle<CR>
 tnoremap <leader><Tab>  <C-\><C-n>:FloatermNext<CR>
 
-let g:floaterm_height = 45
+let g:floaterm_height = 30
 let g:floaterm_width = 150
-let g:floaterm_title = ''
+let g:floaterm_title = '  '
 
 "--------------------------------------------------------------- window
 nmap <C-h> <C-w>h
@@ -133,7 +132,7 @@ nmap <silent> gr <Plug>(coc-references)
 "------------------------------------------------------------------------------ FZF search
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
 noremap  <leader>p :Files<CR>
-noremap  <leader>P :Ag<CR>
+noremap  <leader>P :Rg<CR>
 
 
 "------------------------------------------------------------------------------ Easymotion
@@ -165,3 +164,9 @@ let g:startify_lists = [
           \ { 'type': 'files',     'header': ['   Files']            },
           \ ]
 
+
+"_--------------------------------------------------------------------------InIndents
+let g:indentLine_char = ''
+let g:indentLine_first_char = ''
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
