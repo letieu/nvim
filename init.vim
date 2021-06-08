@@ -17,7 +17,7 @@ Plug 'itchyny/lightline.vim'
 
 
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 "Plug 'airblade/vim-gitgutter'
 "Plug 'posva/vim-vue'
 "Plug 'leafgarland/typescript-vim' " TypeScript syntax
@@ -54,9 +54,9 @@ if (has("termguicolors"))
  set termguicolors
 endif
 syntax enable
-colorscheme gruvbox
+colorscheme dracula
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'dracula',
       \ }
 
 "Set lightline transparent
@@ -92,7 +92,7 @@ noremap  <leader><leader>  <Esc>:FloatermToggle<CR>
 tnoremap <leader><leader>  <C-\><C-n>:FloatermToggle<CR>
 tnoremap <leader><Tab>  <C-\><C-n>:FloatermNext<CR>
 
-let g:floaterm_height = 45
+let g:floaterm_height = 34
 let g:floaterm_width = 150
 let g:floaterm_title = ''
 
