@@ -1,10 +1,14 @@
 local lspconfig = require'lspconfig'
+local util = require('lsp/util')
 
 local sumneko_root_path = os.getenv("HOME") .. "/Documents/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 lspconfig.sumneko_lua.setup({
+     on_attach = function(client, bufnr)
+        util.map_key(bufnr)
+        print("Start Lua Lsp")
+      end,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-    capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
@@ -26,5 +30,4 @@ lspconfig.sumneko_lua.setup({
             }
         }
     },
-    on_attach = on_attach_common
 })

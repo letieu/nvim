@@ -8,15 +8,19 @@ if !exists('g:vscode')
       Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
       Plug 'easymotion/vim-easymotion'
       Plug 'tpope/vim-surround'
-      Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+      Plug 'lukas-reineke/indent-blankline.nvim', {'branch' : 'lua'}
+      "Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
       Plug 'voldikss/vim-floaterm'
       Plug 'ryanoasis/vim-devicons'
       Plug 'mhinz/vim-startify'
       Plug 'itchyny/lightline.vim'
       Plug 'dracula/vim', { 'as': 'dracula' }
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
       Plug 'ray-x/lsp_signature.nvim'
-      "Plug 'jiangmiao/auto-pairs'
+      Plug 'kyazdani42/nvim-web-devicons'
+      Plug 'romgrk/barbar.nvim'
+      Plug 'kyazdani42/nvim-tree.lua'
 else
       Plug 'tpope/vim-surround'
       Plug 'asvetliakov/vim-easymotion' , { 'as': 'vsc-easymotion'}
@@ -26,12 +30,15 @@ call plug#end()
 
 " ================================================================================= normal config
 if !exists('g:vscode')
+      lua require("keymap")
 
-      "-------------------------------------------------------------- LSP config
-      lua require("compe-config")
-      lua require("treesitter-config")
+      "-------------------------------------------------------------- new Lua config
+      lua require("plugins/compe-config")
+      lua require("plugins/tree")
+      lua require("plugins/treesitter-config")
       lua require("lsp_signature").on_attach()
 
+      "-------------------------------------------------------------- LSP config
       lua require("lsp/python-config")
       lua require("lsp/lua-config")
       lua require("lsp/js-config")
@@ -49,6 +56,8 @@ if !exists('g:vscode')
       set softtabstop=4   " sets the number of columns for a tab
       set expandtab       " expand tabs to spaces
       filetype plugin indent on
+      nnoremap <leader>h   :foldclose<CR>
+      nnoremap <leader>l   :foldopen<CR>
 
       "--------------------------------------------------------------- theme config
       if (has("termguicolors"))
@@ -56,19 +65,7 @@ if !exists('g:vscode')
       endif
       syntax enable
       colorscheme dracula
-      let g:lightline = {'colorscheme': 'dracula'}
-      "Transparent background
-      "hi Normal guibg=NONE ctermbg=NONE
-
-      "--------------------------------------------------------------- NERTtree config
-      let g:NERDTreeShowHidden = 1
-      let g:NERDTreeMinimalUI = 1
-      let g:NERDTreeIgnore = []
-      let g:NERDTreeStatusline = ''
-      " Open the existing NERDTree on each new tab.
-      autocmd BufWinEnter * silent NERDTreeMirror
-      nnoremap <leader>e :NERDTreeToggle<CR>
-      nnoremap <leader>h   :foldclose<CR>
+      let g:lightline = {'colorscheme': 'dracula', 'enable': {'tabline': 0}}
 
 
       "---------------------------------------------------------------- terminal
@@ -104,17 +101,24 @@ if !exists('g:vscode')
 
 
       "------------------------------------------------------------------------------- TAB
-      noremap <leader>1 1gt
-      noremap <leader>2 2gt
-      noremap <leader>3 3gt
-      noremap <leader>4 4gt
-      noremap <leader>5 5gt
-      noremap <leader>6 6gt
-      noremap <leader>7 7gt
-      noremap <leader>8 8gt
-      noremap <leader>9 9gt
-      noremap <leader>0 :tablast<cr>
+      noremap <leader>1 :BufferGoto 1 <CR>
+      noremap <leader>2 :BufferGoto 2 <CR>
+      noremap <leader>3 :BufferGoto 3 <CR>
+      noremap <leader>4 :BufferGoto 4 <CR>
+      noremap <leader>5 :BufferGoto 5 <CR>
+      noremap <leader>6 :BufferGoto 6 <CR>
+      noremap <leader>7 :BufferGoto 7 <CR>
+      noremap <leader>8 :BufferGoto 8 <CR>
+      noremap <leader>9 :BufferGoto 9 <CR>
+      noremap <leader>9 :BufferGoto 9 <CR>
+      noremap <leader>x :BufferClose<cr>
 
+    let bufferline = get(g:, 'bufferline', {})
+    let bufferline.closable = v:false
+    let bufferline.icons = 'both'
+    let bufferline.icon_custom_colors = v:false
+    let bufferline.colorscheme = 'dracula'
+    
       " ------------------------------------------------------------------------treesitter
       set foldmethod=expr
       set foldexpr=nvim_treesitter#foldexpr()
