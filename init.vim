@@ -14,6 +14,9 @@ if !exists('g:vscode')
       Plug 'mhinz/vim-startify'
       Plug 'itchyny/lightline.vim'
       Plug 'dracula/vim', { 'as': 'dracula' }
+      Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+      Plug 'ray-x/lsp_signature.nvim'
+      "Plug 'jiangmiao/auto-pairs'
 else
       Plug 'tpope/vim-surround'
       Plug 'asvetliakov/vim-easymotion' , { 'as': 'vsc-easymotion'}
@@ -23,21 +26,29 @@ call plug#end()
 
 " ================================================================================= normal config
 if !exists('g:vscode')
+
       "-------------------------------------------------------------- LSP config
       lua require("compe-config")
-      lua require("python-config")
-      lua require("js-config")
-      lua require("efm-config")
+      lua require("treesitter-config")
+      lua require("lsp_signature").on_attach()
+
+      lua require("lsp/python-config")
+      lua require("lsp/lua-config")
+      lua require("lsp/js-config")
+      lua require("lsp/php-config")
+      lua require("lsp/efm-config")
+      lua require("lsp/c-config")
       
-      "--------------------------------------------------------------- General
+      "--------------------------------------------------------------- general
       let mapleader = " "
       set number  relativenumber
       set clipboard+=unnamedplus " clipboard global
-      set noshowmode      " hide Text in the command bar
-      set tabstop=2       " The width of a TAB is set to 4.
-      set shiftwidth=2    " Indents will have a width of 4
-      set softtabstop=2   " Sets the number of columns for a TAB
-      set expandtab       " Expand TABs to spaces
+      "set noshowmode      " hide text in the command bar
+      set tabstop=4       " the width of a tab is set to 4.
+      set shiftwidth=4    " indents will have a width of 4
+      set softtabstop=4   " sets the number of columns for a tab
+      set expandtab       " expand tabs to spaces
+      filetype plugin indent on
 
       "--------------------------------------------------------------- theme config
       if (has("termguicolors"))
@@ -47,7 +58,7 @@ if !exists('g:vscode')
       colorscheme dracula
       let g:lightline = {'colorscheme': 'dracula'}
       "Transparent background
-      hi Normal guibg=NONE ctermbg=NONE
+      "hi Normal guibg=NONE ctermbg=NONE
 
       "--------------------------------------------------------------- NERTtree config
       let g:NERDTreeShowHidden = 1
@@ -57,6 +68,7 @@ if !exists('g:vscode')
       " Open the existing NERDTree on each new tab.
       autocmd BufWinEnter * silent NERDTreeMirror
       nnoremap <leader>e :NERDTreeToggle<CR>
+      nnoremap <leader>h   :foldclose<CR>
 
 
       "---------------------------------------------------------------- terminal
@@ -84,7 +96,7 @@ if !exists('g:vscode')
       "------------------------------------------------------------------------------ FZF search
       let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
       noremap  <leader>p :Files<CR>
-      noremap  <leader>P :Ag<CR>
+      noremap  <leader>P :Rg<CR>
 
 
       "------------------------------------------------------------------------------ Easymotion
@@ -103,18 +115,23 @@ if !exists('g:vscode')
       noremap <leader>9 9gt
       noremap <leader>0 :tablast<cr>
 
+      " ------------------------------------------------------------------------treesitter
+      set foldmethod=expr
+      set foldexpr=nvim_treesitter#foldexpr()
+
+      "------------------------------------------------------------------------------- compe
+      inoremap <silent><expr> <C-Space> compe#complete()
+      inoremap <silent><expr> <M-j>      compe#confirm('<CR>')
+
       "------------------------------------------------------------------------------- Starify
       let g:startify_bookmarks = [
                   \ { 'Vim-config': '~/.config/nvim/' },
-                  \ { 'Adflex-dropship': '~/tt_adflex/opc/src' },
-                  \ { 'Adflex-cpo': '~/tt_adflex/cpo/src' },
-                  \ { 'Adflex-report': '~/tt_adflex/report/src' },
-                  \ { 'Fun-invoice': '~/tt_fun/sigma-vue' },
                   \ ]
       let g:startify_lists = [
                 \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-                \ { 'type': 'files',     'header': ['   Files']            },
+                \ { 'type': 'sessions',     'header': ['   Files']            },
                 \ ]
+
 
 " ================================================================================= VS CODE config
 else
@@ -131,3 +148,12 @@ else
       xnoremap <C-l> <Cmd>call VSCodeNotify('workbench.action.focusRightGroup')<CR>
 
 endif
+
+
+
+" -----------------
+"  GUI - Settings
+" -----------------
+set guifont=Fira\ Code\ Light:h10
+let g:neovide_fullscreen=v:true
+
