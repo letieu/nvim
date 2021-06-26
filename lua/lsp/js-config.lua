@@ -9,6 +9,11 @@ nvim_lsp['tsserver'].setup {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 }
 
-nvim_lsp.vuels.setup{}
+nvim_lsp.vuels.setup{
+  on_attach = function(client, bufnr)
+    util.map_key(bufnr)
+    print("Start Vuels Lsp")
+  end,
+}
 
 

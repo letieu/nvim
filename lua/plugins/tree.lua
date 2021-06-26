@@ -1,7 +1,9 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-    vim.g.nvim_tree_bindings = {
+
+
+vim.g.nvim_tree_bindings = {
       ["l"]              = tree_cb("edit"),
-      ["h"]           = tree_cb("close_node"),
+      ["h"]              = tree_cb("close_node"),
 
       ["<C-]>"]          = tree_cb("cd"),
       ["<C-[>"]          = tree_cb("dir_up"),
@@ -17,5 +19,4 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
       ["c"]              = tree_cb("copy"),
       ["p"]              = tree_cb("paste"),
       ["y"]              = tree_cb("copy_name"),
-      ["gy"]             = tree_cb("copy_absolute_path"),
 }
