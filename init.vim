@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 if !exists('g:vscode')
     Plug 'neovim/nvim-lspconfig'
+    Plug 'glepnir/lspsaga.nvim'
     Plug 'hrsh7th/nvim-compe'
     Plug 'preservim/nerdcommenter'
     Plug 'junegunn/fzf.vim'
@@ -16,7 +17,7 @@ if !exists('g:vscode')
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-    Plug 'ray-x/lsp_signature.nvim'
+    "Plug 'ray-x/lsp_signature.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'kyazdani42/nvim-tree.lua'
@@ -35,11 +36,12 @@ if !exists('g:vscode')
 
     "-------------------------------------------------------------- new Lua config plugins
     lua require("plugins/compe-config")
+    lua require("plugins/lspsaga")
     lua require("plugins/tree")
     lua require("plugins/tabline")
     lua require("plugins/statusline")
     lua require("plugins/treesitter-config")
-    lua require("lsp_signature").on_attach()
+    "lua require("lsp_signature").on_attach()
 
     "-------------------------------------------------------------- LSP config
     lua require("lsp/python-config")
@@ -76,6 +78,7 @@ if !exists('g:vscode')
     let g:floaterm_height = 34
     let g:floaterm_width = 150
     let g:floaterm_title = ''
+    highlight FloatermBorder guibg=bg
 
     "--------------------------------------------------------------- window
     nmap <C-h> <C-w>h

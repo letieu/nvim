@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 local galaxyline = require('galaxyline')
 local c = require('../colors').colors
 local u = require('../util')
