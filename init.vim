@@ -30,8 +30,6 @@ call plug#end()
 " ================================================================================= normal config
 if !exists('g:vscode')
     let mapleader = " "
-
-    lua require("global")
     lua require("keymap")
 
     "-------------------------------------------------------------- new Lua config plugins

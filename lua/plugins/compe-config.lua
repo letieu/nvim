@@ -1,4 +1,5 @@
--- ===================================================================================== CONFIG COMPE
+local m = require('../util').map_key
+
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -51,3 +52,9 @@ _G.s_tab_complete = function()
     return t "<S-Tab>"
   end
 end
+
+
+m("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+m("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+m("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+m("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})

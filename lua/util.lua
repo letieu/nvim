@@ -1,3 +1,5 @@
+local buffer = require('galaxyline.provider_buffer')
+
 local M = {}
 
 M.map_key = function (mode, key, action, opts)
@@ -6,12 +8,20 @@ M.map_key = function (mode, key, action, opts)
   vim.api.nvim_set_keymap(mode, key, action, options)
 end
 
-M.is_buffer_empty = function ()
-  return vim.fn.empty(vim.fn.expand '%:t') == 1
+function M.buffer_is_empty ()
+    if vim.fn.empty(vim.fn.expand("%:t")) ~= 1 then
+        return true
+    end
+    return false
 end
 
-M.has_width_gt = function (cols)
-  return vim.fn.winwidth(0) / 2 > cols
+function M.has_width_gt(cols)
+    -- Check if the windows width is greater than a given number of columns
+    return vim.fn.winwidth(0) / 2 > cols
+end
+
+function M.is_in_tree()
+    return buffer.get_buffer_filetype() == 'NVIMTREE'
 end
 
 return M

@@ -1,4 +1,5 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+local m = require'../util'.map_key
 
 
 vim.g.nvim_tree_bindings = {
@@ -20,3 +21,13 @@ vim.g.nvim_tree_bindings = {
       ["p"]              = tree_cb("paste"),
       ["y"]              = tree_cb("copy_name"),
 }
+
+function close_tab()
+    vim.api.nvim_command('NvimTreeClose')
+    vim.api.nvim_command('bdelete')
+    vim.api.nvim_command('NvimTreeOpen')
+    vim.api.nvim_command('wincmd l')
+end
+
+m('n', '<Space>e', '<CMD>NvimTreeToggle<CR>')
+m("n", "<Space>x", "<CMD>lua close_tab()<CR>")
