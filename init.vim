@@ -12,7 +12,7 @@ if !exists('g:vscode')
     Plug 'lukas-reineke/indent-blankline.nvim', {'branch' : 'lua'}
     Plug 'voldikss/vim-floaterm'
     Plug 'ryanoasis/vim-devicons'
-    Plug 'mhinz/vim-startify'
+    "Plug 'mhinz/vim-startify'
     Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -109,14 +109,6 @@ if !exists('g:vscode')
     inoremap <silent><expr> <C-Space> compe#complete()
     inoremap <silent><expr> <M-j> compe#confirm('<CR>')
 
-    "------------------------------------------------------------------------------- Starify
-    let g:startify_bookmarks = [
-              \ { 'Vim-config': '~/.config/nvim/' },
-              \ ]
-    let g:startify_lists = [
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-            \ { 'type': 'sessions',     'header': ['   Files']            },
-            \ ]
 
 " ================================================================================= VS CODE config
 else

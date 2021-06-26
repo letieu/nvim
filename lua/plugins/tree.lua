@@ -28,7 +28,6 @@ function close_tab()
     vim.api.nvim_command('NvimTreeOpen')
     vim.api.nvim_command('wincmd l')
 end
-print()
 
 m('n', '<Space>e', '<CMD>NvimTreeToggle<CR>')
 m("n", "<Space>x", "<CMD>lua close_tab()<CR>")
