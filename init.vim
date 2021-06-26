@@ -20,6 +20,7 @@ if !exists('g:vscode')
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'mhartington/oceanic-next'
 else
     Plug 'tpope/vim-surround'
     Plug 'asvetliakov/vim-easymotion' , { 'as': 'vsc-easymotion'}
@@ -62,8 +63,8 @@ if !exists('g:vscode')
     set termguicolors
     endif
     syntax enable
-    colorscheme dracula
-
+    colorscheme OceanicNext
+    highlight EndOfBuffer guifg=bg
 
     "---------------------------------------------------------------- terminal
     noremap  <leader>t  :FloatermToggle<CR>
@@ -113,7 +114,6 @@ if !exists('g:vscode')
             \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
             \ { 'type': 'sessions',     'header': ['   Files']            },
             \ ]
-
 
 " ================================================================================= VS CODE config
 else
