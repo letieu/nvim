@@ -103,7 +103,7 @@ if !exists('g:vscode')
 
     "------------------------------------------------------------------------------- compe
     inoremap <silent><expr> <C-Space> compe#complete()
-    inoremap <silent><expr> <M-j>      compe#confirm('<CR>')
+    inoremap <silent><expr> <M-j> compe#confirm('<CR>')
 
     "------------------------------------------------------------------------------- Starify
     let g:startify_bookmarks = [
@@ -138,4 +138,3 @@ endif
 " -----------------
 set guifont=Fira\ Code\ Light:h10
 let g:neovide_fullscreen=v:true
-

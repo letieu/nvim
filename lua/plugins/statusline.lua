@@ -10,30 +10,54 @@ local buffer = require('galaxyline.provider_buffer')
 local whitespace = require('galaxyline.provider_whitespace')
 local lspclient = require('galaxyline.provider_lsp')
 
-local function in_editor()
+local function is_in_editor()
     return not(u.is_in_tree())
 end
 
 
---galaxyline.section.left[1]= {
-  --FileSize = {
-    --provider = 'FileSize',
-    --condition = function()
-      --if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-        --return true
-      --end
-      --return false
-      --end,
-    --icon = '   ',
-    --highlight = {c.red,c.bg},
-  --}
---}
-
 galaxyline.section.left[1]= {
-  git = {
-    provider = 'GitBranch',
-    condition = u.is_in_tree,
-    --icon = '   ',
-    highlight = {c.red,c.bg},
-  },
+    gitBranch = {
+        provider = 'GitBranch',
+        condition = u.is_in_tree,
+        icon = '  ',
+        highlight = {c.cyan,c.bg},
+    },
+    getDiffAdd = {
+        provider = 'DiffAdd',
+        condition = u.is_in_tree,
+        highlight = {c.red,c.bg},
+    }
+}
+
+-- LSP
+galaxyline.section.left[2] = {
+    error = {
+        provider = 'DiagnosticError',
+        icon = '  ',
+        highlight = {c.red,c.bg},
+    },
+    warn = {
+        provider = 'DiagnosticWarn',
+        icon = '  ',
+        highlight = {c.orange,c.bg},
+    },
+    hint = {
+        provider = 'DiagnosticHint',
+        icon = '  ',
+        highlight = {c.cyan,c.bg},
+    },
+    info = {
+        provider = 'DiagnosticInfo',
+        icon = '  ',
+        highlight = {c.green,c.bg},
+    },
+}
+
+galaxyline.section.right[1] = {
+    file = {
+        provider = 'FileName',
+        icon = '  ',
+        condition = is_in_editor,
+        highlight = {c.pink,c.bg},
+    }
 }
