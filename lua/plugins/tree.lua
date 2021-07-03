@@ -23,11 +23,9 @@ vim.g.nvim_tree_bindings = {
 }
 
 function close_tab()
-    vim.api.nvim_command('NvimTreeClose')
-    vim.api.nvim_command('bdelete')
-    vim.api.nvim_command('NvimTreeOpen')
-    vim.api.nvim_command('wincmd l')
+    vim.api.nvim_command('bp')
+    vim.api.nvim_command('bd #')
 end
 
 m('n', '<Space>e', '<CMD>NvimTreeToggle<CR>')
-m("n", "<Space>x", "<CMD>lua close_tab()<CR>")
+m("n", "<Space>q", "<CMD>lua close_tab()<CR>")

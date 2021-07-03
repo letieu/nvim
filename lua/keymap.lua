@@ -3,3 +3,4 @@ local m = require('util').map_key
 
 m("n", "<Space>h", "<CMD>foldclose<CR>")
 m("n", "<Space>l", "<CMD>foldopen<CR>")
+m("n", "<Space>`", "<CMD>lua DB.start()<CR>")

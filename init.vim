@@ -22,6 +22,9 @@ if !exists('g:vscode')
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'mhartington/oceanic-next'
+    Plug 'rafcamlet/nvim-luapad'
+    Plug 'folke/which-key.nvim'
+
 else
     Plug 'tpope/vim-surround'
     Plug 'asvetliakov/vim-easymotion' , { 'as': 'vsc-easymotion'}
@@ -31,6 +34,9 @@ call plug#end()
 
 " ================================================================================= normal config
 if !exists('g:vscode')
+
+    lua require("dashboard")
+
     let mapleader = " "
     lua require("keymap")
 
@@ -41,7 +47,7 @@ if !exists('g:vscode')
     lua require("plugins/tabline")
     lua require("plugins/statusline")
     lua require("plugins/treesitter-config")
-    "lua require("lsp_signature").on_attach()
+    lua require("plugins/whichkey")
 
     "-------------------------------------------------------------- LSP config
     lua require("lsp/python-config")
@@ -52,12 +58,15 @@ if !exists('g:vscode')
     lua require("lsp/c-config")
 
     "--------------------------------------------------------------- general
+    set hidden
+    set noswapfile
     set number  relativenumber
     set clipboard+=unnamedplus " clipboard global
     set tabstop=4       " the width of a tab is set to 4.
     set shiftwidth=4    " indents will have a width of 4
     set softtabstop=4   " sets the number of columns for a tab
     set expandtab       " expand tabs to spaces
+    set foldlevel=5
     filetype plugin indent on
 
     "--------------------------------------------------------------- theme config
@@ -67,6 +76,7 @@ if !exists('g:vscode')
     syntax enable
     colorscheme OceanicNext
     highlight EndOfBuffer guifg=bg
+    highlight Folded guifg=#029533  
 
     "---------------------------------------------------------------- terminal
     noremap  <leader>t  :FloatermToggle<CR>
