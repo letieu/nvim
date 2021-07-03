@@ -28,7 +28,8 @@ local dracula = {
     pink = '#ff79c6',
     purple = '#bd93f9',
     red = '#ff5555',
-    yellow = '#f1fa8c'
+    yellow = '#f1fa8c',
+    dark = '#0e171c'
 }
 
 M.colors = dracula

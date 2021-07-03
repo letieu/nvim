@@ -21,9 +21,10 @@ if !exists('g:vscode')
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'mhartington/oceanic-next'
     Plug 'rafcamlet/nvim-luapad'
     Plug 'folke/which-key.nvim'
+    Plug 'mhartington/oceanic-next'
+    Plug 'folke/tokyonight.nvim'
 
 else
     Plug 'tpope/vim-surround'
@@ -77,6 +78,9 @@ if !exists('g:vscode')
     colorscheme OceanicNext
     highlight EndOfBuffer guifg=bg
     highlight Folded guifg=#029533  
+
+    highlight NvimTreeNormal guibg=#0e171c
+    highlight NvimTreeEndOfBuffer guibg=#0e171c guifg=#0e171c
 
     "---------------------------------------------------------------- terminal
     noremap  <leader>t  :FloatermToggle<CR>

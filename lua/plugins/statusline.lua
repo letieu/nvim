@@ -21,12 +21,12 @@ galaxyline.section.left[1]= {
         provider = 'GitBranch',
         condition = u.is_in_tree,
         icon = '  ',
-        highlight = {c.cyan,c.bg},
+        highlight = {c.cyan,c.dark},
     },
     getDiffAdd = {
         provider = 'DiffAdd',
         condition = u.is_in_tree,
-        highlight = {c.red,c.bg},
+        highlight = {c.red,c.dark},
     }
 }
 
@@ -35,21 +35,25 @@ galaxyline.section.left[2] = {
     error = {
         provider = 'DiagnosticError',
         icon = '  ',
+        condition = is_in_editor,
         highlight = {c.red,c.bg},
     },
     warn = {
         provider = 'DiagnosticWarn',
         icon = '  ',
+        condition = is_in_editor,
         highlight = {c.orange,c.bg},
     },
     hint = {
         provider = 'DiagnosticHint',
         icon = '  ',
+        condition = is_in_editor,
         highlight = {c.cyan,c.bg},
     },
     info = {
         provider = 'DiagnosticInfo',
         icon = '  ',
+        condition = is_in_editor,
         highlight = {c.green,c.bg},
     },
 }
